@@ -77,5 +77,10 @@ const CourseInfo = {
   
   //actual code functions start: 
   function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
-    //part 1, create an check to see if assignmentgroups id and courseinfo id are the same.
+    //part 1, create an array of objects that takes the assignnments from the assignment groups.
+    let mainMents = assignmentgroups.assignments;
+    return mainMents;
+
   }
+
+console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions));
