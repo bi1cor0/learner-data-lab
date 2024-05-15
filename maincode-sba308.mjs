@@ -75,43 +75,48 @@ const CourseInfo = {
     }
   ];
   
-  
+  function transformLearner(ids) {
+    const resultArr = [];
 
-  //actual code functions start: 
+    for(const s of ids){
+          //part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
+      let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
+      let assignment_id = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
+
+      const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function is essentially going through the resultArr to find an instance of repeated learner Ids
+
+      if(!isIDsame) {
+        resultArr.push({[assignment_id]: s.submission,
+          id: learner_id
+        })
+      } else { 
+          isIDsame[assignment_id] = s.submission;
+        }
+      
+    }
+    return resultArr;
+  }
+
+  //part 3 do some math
+function doTotalAvg(num1, num2){
+  let total = num1 + num2;
+  console.log(total);
+  let avg = total / 2;
+  console.log(avg);
+  return avg;
+}
+
 function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //part 1, create an array of objects that takes the assignnments from the assignment groups.
     let mainMents = assignmentgroups.assignments;
-    
-    //part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
+    let transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
 
-    function transformLearner(ids) {
-      const resultArr = [];
-
-      for(const s of ids){
-        let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
-        let assignment_id = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
-
-        const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function is essentially going through
-
-        if(!isIDsame) {
-          resultArr.push({[assignment_id]: s.submission,
-            id: learner_id
-          })
-        } else { 
-            isIDsame[assignment_id] = s.submission;
-          }
-        
-      }
-      return resultArr;
-    }
-    
-    const transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
-
-//part 3 do some math
-
+    console.log(transformed[0][`1`].scores) 
+    console.log(mainMents['1'].points_possible);
     return transformed;
-    
-
   }
+
+let test = doTotalAvg(99, 100);
+console.log(test)
 
 console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions))
