@@ -88,7 +88,7 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
       const resultArr = [];
 
       for(const s of ids){
-        let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can used to call keys themselves within an array. 
+        let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
         let assignment_id = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
 
         const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function is essentially going through
@@ -105,7 +105,10 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
       return resultArr;
     }
     
-    const transformed = transformLearner(learnersubs);
+    const transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
+
+//part 3 do some math
+
     return transformed;
     
 
