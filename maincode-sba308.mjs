@@ -75,12 +75,40 @@ const CourseInfo = {
     }
   ];
   
+  
+
   //actual code functions start: 
-  function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
+function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //part 1, create an array of objects that takes the assignnments from the assignment groups.
     let mainMents = assignmentgroups.assignments;
-    return mainMents;
+    
+    //part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
+
+    function transformLearner(ids) {
+      const resultArr = [];
+
+      for(const s of ids){
+        let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can used to call keys themselves within an array. 
+        let assignment_id = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
+
+        const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function is essentially going through
+
+        if(!isIDsame) {
+          resultArr.push({[assignment_id]: s.submission,
+            id: learner_id
+          })
+        } else { 
+            isIDsame[assignment_id] = s.submission;
+          }
+        
+      }
+      return resultArr;
+    }
+    
+    const transformed = transformLearner(learnersubs);
+    return transformed;
+    
 
   }
 
-console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions));
+console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions))
