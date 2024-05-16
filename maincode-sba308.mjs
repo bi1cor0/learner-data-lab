@@ -98,13 +98,19 @@ const CourseInfo = {
   }
 
   //part 3 do some math
-function doTotalAvg(num1, num2){
-  let total = num1 + num2;
-  console.log(total);
-  let avg = total / 2;
-  console.log(avg);
-  return avg;
+function sum(...nums) { //using the separator parameter, I can input as many numbers I need to add up to.
+    return nums.reduce((a,b) => a + b, 0); //called reduce function to add all selected numbers in the parameters.
 }
+
+function divide(learnerScore, totalScore) { //dividing function. will be used in conjuction with the sum function to try and find the weighted average of the student. 
+   return learnerScore / totalScore;
+}
+
+function isDue(dueDate, submissionDate) { //if statement used to check due date.
+  return Date.parse(submissionDate) < Date.parse(dueDate);
+}
+
+
 
 function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //part 1, create an array of objects that takes the assignnments from the assignment groups.
