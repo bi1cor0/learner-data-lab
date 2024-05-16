@@ -111,7 +111,7 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     let mainMents = assignmentgroups.assignments;
     let transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
 
-    console.log(transformed[0][`1`].scores) 
+    console.log(transformed[0][`1`][`score`]) 
     console.log(mainMents['1'].points_possible);
     return transformed;
   }
