@@ -135,17 +135,24 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //  2: one
     //} 
 
-    function allTogether(studentArr, assignArr){
+    function allTogether(studentObj, assignArr){
       let studentSum;
       let assignSum;
-      const studentID = studentArr[0].id;
+      const studentID = studentObj.id;
       let results = {
         id: studentID
+      }
+      for(let c in studentObj){
+
+        if(c == 'id') {continue;}
+        console.log(studentObj[c].score)
+
+  
       }
       return results;
     }
 
-    let mainResults = allTogether(transformed, mainMents)
+    let mainResults = allTogether(transformed[0], mainMents)
     return mainResults
 
   }
