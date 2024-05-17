@@ -74,23 +74,22 @@ const CourseInfo = {
       }
     }
   ];
-  
+
+ ///////////////////////////////////////////////////////////////////////////////////////////start/////////////////////////////////////////////////////////////////////// 
   function transformLearner(ids) {
     const resultArr = [];
 
-    for(const s of ids){
-          //part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
+    for(const s of ids){//part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
       let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
-      let assignment_id = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
+      let assignmentid = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
 
-      const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function is essentially going through the resultArr to find an instance of repeated learner Ids
-
+      const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the function's output is actually the instance where 
       if(!isIDsame) {
-        resultArr.push({[assignment_id]: s.submission,
+        resultArr.push({[assignmentid]: s.submission,
           id: learner_id
-        })
+        }) 
       } else { 
-          isIDsame[assignment_id] = s.submission;
+          isIDsame[assignmentid] = s.submission;
         }
       
     }
@@ -99,7 +98,7 @@ const CourseInfo = {
 
   //part 3 do some math
 function sum(...nums) { //using the separator parameter, I can input as many numbers I need to add up to.
-    return nums.reduce((a,b) => a + b, 0); //called reduce function to add all selected numbers in the parameters.
+    return nums.reduce((i,j) => i + j, 0); //called reduce function to add all selected numbers in the parameters.
 }
 
 function divide(learnerScore, totalScore) { //dividing function. will be used in conjuction with the sum function to try and find the weighted average of the student. 
@@ -117,12 +116,22 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     let mainMents = assignmentgroups.assignments;
     let transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
 
-    console.log(transformed[0][`1`][`score`]) 
-    console.log(mainMents['1'].points_possible);
-    return transformed;
+    const weightSumtop = sum(transformed[0][1][`score`], transformed[0][2][`score`], transformed[0][3][`score`]) 
+    const weightSumbottom = sum(mainMents[0]['points_possible'], mainMents[1]['points_possible'], mainMents[2]['points_possible'])
+    
+    const studID = transformed[0]['id'];
+    const weightAvg = divide(weightSumtop, weightSumbottom)
+    let one = divide(transformed[0][1][`score`],mainMents[0]['points_possible'])
+
+    
+    let testObj = {
+      id: studID,
+      avg: weightAvg,
+      2: one
+    }
+
+    return testObj;
   }
 
-let test = doTotalAvg(99, 100);
-console.log(test)
 
 console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions))
