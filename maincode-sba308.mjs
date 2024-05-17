@@ -109,6 +109,11 @@ function isDue(dueDate, submissionDate) { //if statement used to check due date.
   return Date.parse(submissionDate) < Date.parse(dueDate);
 }
 
+//part 4 put it all together
+//create a function that takes the reformatted LearnerSubmitions and extract the necessary data. First take the student ID, and then iterate through the LearnerSubmissions. 
+//Second, take the learner assignments and manipulate the scores. Create a variable to take the values of each object to reference later in the weighted avg scores. 
+
+
 
 
 function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
@@ -116,21 +121,33 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     let mainMents = assignmentgroups.assignments;
     let transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
 
-    const weightSumtop = sum(transformed[0][1][`score`], transformed[0][2][`score`], transformed[0][3][`score`]) 
-    const weightSumbottom = sum(mainMents[0]['points_possible'], mainMents[1]['points_possible'], mainMents[2]['points_possible'])
-    
-    const studID = transformed[0]['id'];
-    const weightAvg = divide(weightSumtop, weightSumbottom)
-    let one = divide(transformed[0][1][`score`],mainMents[0]['points_possible'])
+    //const weightSumtop = sum(transformed[0][1][`score`], transformed[0][2][`score`], transformed[0][3][`score`]) 
+    //const weightSumbottom = sum(mainMents[0]['points_possible'], mainMents[1]['points_possible'], mainMents[2]['points_possible'])
+    //
+    //const studID = transformed[0]['id'];
+    //const weightAvg = divide(weightSumtop, weightSumbottom)
+    //let one = divide(transformed[0][1][`score`],mainMents[0]['points_possible'])
+//
+    //
+    //let testObj = {
+    //  id: studID,
+    //  avg: weightAvg,
+    //  2: one
+    //} 
 
-    
-    let testObj = {
-      id: studID,
-      avg: weightAvg,
-      2: one
+    function allTogether(studentArr, assignArr){
+      let studentSum;
+      let assignSum;
+      const studentID = studentArr[0].id;
+      let results = {
+        id: studentID
+      }
+      return results;
     }
 
-    return testObj;
+    let mainResults = allTogether(transformed, mainMents)
+    return mainResults
+
   }
 
 
