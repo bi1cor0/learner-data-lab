@@ -81,7 +81,7 @@ const CourseInfo = {
 
     for(const s of ids){//part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
       let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
-      let assignmentid = s.assignment_id; //i'm using the value of the object in the array and putting it in a holder variable to be used in this loop.
+      let assignmentid = s.assignment_id; //i'm using the value of the object in the array ids and putting it in a holder variable to be used in this loop.
 
       const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the function's output is actually the instance where 
       if(!isIDsame) {
@@ -97,9 +97,7 @@ const CourseInfo = {
   }
 
   //part 3 do some math
-function sum(...nums) { //using the separator parameter, I can input as many numbers I need to add up to.
-    return nums.reduce((i,j) => i + j, 0); //called reduce function to add all selected numbers in the parameters.
-}
+
 
 function divide(learnerScore, totalScore) { //dividing function. will be used in conjuction with the sum function to try and find the weighted average of the student. 
    return learnerScore / totalScore;
@@ -109,9 +107,33 @@ function isDue(dueDate, submissionDate) { //if statement used to check due date.
   return Date.parse(submissionDate) < Date.parse(dueDate);
 }
 
-//part 4 put it all together
+function allTogether(studentObj, assignArr){
+  let count = 0;
+  let studentSum = 0;
+  let assignSum = 0;
+  const studentID = studentObj.id;
+  let results = {
+    id: studentID
+  }
+
+  //part 4 put it all together
 //create a function that takes the reformatted LearnerSubmitions and extract the necessary data. First take the student ID, and then iterate through the LearnerSubmissions. 
 //Second, take the learner assignments and manipulate the scores. Create a variable to take the values of each object to reference later in the weighted avg scores. 
+
+  for(let c in studentObj){
+    if(c == 'id') {continue;}
+    results[c] =  divide(studentObj[c].score, assignArr[count].points_possible);
+    studentSum += studentObj[c].score;
+    assignSum += assignArr[count].points_possible;
+    console.log(studentSum, assignSum, results)
+    count++
+
+  }
+  results.avg = divide(studentSum, assignSum);
+  return results;
+}
+
+
 
 
 
@@ -135,22 +157,7 @@ function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //  2: one
     //} 
 
-    function allTogether(studentObj, assignArr){
-      let studentSum;
-      let assignSum;
-      const studentID = studentObj.id;
-      let results = {
-        id: studentID
-      }
-      for(let c in studentObj){
 
-        if(c == 'id') {continue;}
-        console.log(studentObj[c].score)
-
-  
-      }
-      return results;
-    }
 
     let mainResults = allTogether(transformed[0], mainMents)
     return mainResults
