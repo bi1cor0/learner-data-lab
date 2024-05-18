@@ -96,9 +96,7 @@ const CourseInfo = {
     return resultArr;
   }
 
-  //part 3 do some math
-
-
+//part 3 do some math
 function divide(learnerScore, totalScore) { //dividing function. will be used in conjuction with the sum function to try and find the weighted average of the student. 
    return learnerScore / totalScore;
 }
@@ -125,7 +123,6 @@ function allTogether(studentObj, assignArr){
     results[c] =  divide(studentObj[c].score, assignArr[count].points_possible);
     studentSum += studentObj[c].score;
     assignSum += assignArr[count].points_possible;
-    console.log(studentSum, assignSum, results)
     count++
 
   }
@@ -134,33 +131,20 @@ function allTogether(studentObj, assignArr){
 }
 
 
-
-
-
-
+//////main function/////////////////////////
 function getLearnerData(courseinfo, assignmentgroups, learnersubs) {
     //part 1, create an array of objects that takes the assignnments from the assignment groups.
     let mainMents = assignmentgroups.assignments;
     let transformed = transformLearner(learnersubs); //created new variable that takes the new reformatted learnersubs array.
 
-    //const weightSumtop = sum(transformed[0][1][`score`], transformed[0][2][`score`], transformed[0][3][`score`]) 
-    //const weightSumbottom = sum(mainMents[0]['points_possible'], mainMents[1]['points_possible'], mainMents[2]['points_possible'])
-    //
-    //const studID = transformed[0]['id'];
-    //const weightAvg = divide(weightSumtop, weightSumbottom)
-    //let one = divide(transformed[0][1][`score`],mainMents[0]['points_possible'])
-//
-    //
-    //let testObj = {
-    //  id: studID,
-    //  avg: weightAvg,
-    //  2: one
-    //} 
+    let mainResults = [];
+
+    for(let i = 0; i < transformed.length; i++){
+      mainResults.push(allTogether(transformed[i], mainMents))
+    }
 
 
-
-    let mainResults = allTogether(transformed[0], mainMents)
-    return mainResults
+    return mainResults;
 
   }
 
