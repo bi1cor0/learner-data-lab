@@ -53,7 +53,7 @@ const CourseInfo = {
       learner_id: 125,
       assignment_id: 3,
       submission: {
-        submitted_at: "2023-01-25",
+        submitted_at: "3156-11-16",
         score: 400
       }
     },
@@ -76,22 +76,25 @@ const CourseInfo = {
   ];
 
  ///////////////////////////////////////////////////////////////////////////////////////////start/////////////////////////////////////////////////////////////////////// 
-  function transformLearner(ids) {
-    const resultArr = [];
+  
+ //part 2, Transform LearnerSubmissions array into the bare-essentials array. with only the student id, assignment id, and the student's scores on each assignment. And it all has to be organized according to student ID. 
+ function transformLearner(ids) {
+    const resultArr = []; //creating a new array that will hold the transformed 
 
-    for(const s of ids){//part 2, iterate through the leanersubs array of objects. put learner_id in a placeholder var and create empty object. Create a new function within this function. 
-      let learner_id = s.learner_id; //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
-      let assignmentid = s.assignment_id; //i'm using the value of the object in the array ids and putting it in a holder variable to be used in this loop.
+    for(const s of ids){
+      //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
+      let learnerid = s.learner_id; //setting up variables to extract the learner ID from each of the objects.
+      let assignmentid = s.assignment_id; //i'm doing the same to put the assignment id here and putting it in a holder variable to be used in this loop.
 
-      const isIDsame = resultArr.find(item => item.id === learner_id); //i found and read up on the .find function. the find function searches for the first instance of what I set the function to find.
-      // In this case: if the iterator: item.id in the resultArr array, has the same learner_id as the LearnerSubmissions, .find will send out the object, which I put in a var.                   
+      const isIDsame = resultArr.find(item => item.id === learnerid); //i found and read up on the .find function. the find function searches for the first instance of what I set the function to find.
+      // In this case: if the iterator: item.id in the resultArr array, has the same learnerid as the LearnerSubmissions, .find will send out the object, which I put in a var.                   
       if(!isIDsame) { //now if isIDSsame is false (empty) then a new object within the array will start. 
         resultArr.push({[assignmentid]: s.submission,
-          id: learner_id //the resultArr will push out an object with the assignmentid key name with the value of whatever iterator s found in .submission. along with the id of the learner. this will in turn create a new object in the array. 
+          id: learnerid //the resultArr will push out an object with the assignmentid key name with the value of whatever iterator s found in .submission. along with the id of the learner. this will in turn create a new object in the array. 
         } )  
       } else {  //if isIDsame is true (has a value) then it will add on to the object inside.
           isIDsame[assignmentid] = s.submission; //the assignmentid will uptick, and will create a new entry in the object of isIDsame. isIDsame is actually referencing an object directly onto the resultArr array.
-        }//so, whatever I do to the object isIDsame, I do to the object in resultArr. In this case, I'm reassigning the assignment ID in the object entry, and includeing the submission
+        }//so, whatever I do to the object isIDsame, I do to the object in resultArr. In this case, I'm reassigning the assignment ID in the object entry, and including the submission
         //once the loop continues, resultArr should have more entries in the object value in the array for as long as item.id and learner_id are the same. 
     } 
     return resultArr;
