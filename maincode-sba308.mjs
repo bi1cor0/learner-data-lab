@@ -83,7 +83,7 @@ const CourseInfo = {
 
     for(const s of ids){
       //found out you can set the iterator var in a for of loop can be used to call keys themselves within an array. 
-      let learnerid = s.learner_id; //setting up variables to extract the learner ID from each of the objects.
+      let learnerid = s.learner_id; //setting up variables to extract the learner ID from each of the objects in the array.
       let assignmentid = s.assignment_id; //i'm doing the same to put the assignment id here and putting it in a holder variable to be used in this loop.
 
       const isIDsame = resultArr.find(item => item.id === learnerid); //i found and read up on the .find function. the find function searches for the first instance of what I set the function to find.
